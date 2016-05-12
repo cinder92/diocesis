@@ -32,6 +32,11 @@
 
 						//validar que sea un evento
 						$type = get_post_type();
+						$gallery = get_post_meta(get_the_ID(),'gallery',false);
+						$attachments = get_post_meta(get_the_ID(),'JoomlaAttach',false);
+
+						$gallery = array_filter($gallery);
+						$attachments = array_filter($attachments);
 
 						if($type == 'eventos'){
 							get_template_part('template-parts/event-details');
@@ -39,6 +44,48 @@
 							the_content();
 						}else{
 							the_content();
+						}
+
+						if(count($gallery) > 0 && $gallery != ""){
+							?>
+							<div class="post-gallery owl-carousel">
+							<?php
+							foreach($gallery as $photo){
+								?>
+								<div class="item img-thumbnail">
+									<a href="<?= wp_get_attachment_url($photo) ?>" alt="<?= get_the_title($photo) ?>" style="background-image:url('<?= wp_get_attachment_url($photo) ?>')" class="venobox" title="<?= get_the_title() ?>" data-gall="gallery_<?= get_the_ID() ?>">
+									</a>
+								</div>
+								<?php
+							}
+							?>
+							<div class="clearfix"></div>
+							</div>
+							<?php
+						}
+
+						if(count($attachments) > 0 && $attachments !=""){
+							?>
+							<h3 class="title-attachments">Archivos adjuntos</h3>
+							<ul class="post-attachments">
+							<?php
+
+							foreach($attachments as $file){
+								if(!is_array($file) && $file != "Array"){
+									//devuelve el id
+									?>
+									<li>
+										<a href="<?= wp_get_attachment_url($file)?>" target="_blank">
+											<i class="icon ion-android-attach"></i>
+											<?= basename( get_attached_file($file)) ?>
+										</a>
+									</li>
+									<?php
+								}
+							}
+							?>
+							</ul>
+							<?php
 						}
 
 						// If comments are open or we have at least one comment, load up the comment template.

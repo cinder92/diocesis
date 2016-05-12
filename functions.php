@@ -120,6 +120,7 @@ function midiocesis_scripts() {
 	wp_enqueue_style('megamenu-css',get_template_directory_uri().'/js/plugins/megamenu/css/style.css');
 	wp_enqueue_style('flexslider-css',get_template_directory_uri().'/css/flexslider.css');
     wp_enqueue_style('owl-css',get_template_directory_uri().'/js/plugins/owl/owl.carousel.css');
+    wp_enqueue_style('venobox-css',get_template_directory_uri().'/js/plugins/venobox/venobox.css');
 	wp_enqueue_style( 'midiocesis-style', get_stylesheet_uri() );
 
 	//sticky
@@ -129,6 +130,9 @@ function midiocesis_scripts() {
 
 	//flexslider
 	wp_enqueue_script( 'flexslider', get_template_directory_uri().'/js/plugins/flexslider/jquery.flexslider-min.js', array('jquery'), '0.0.1', true );
+
+    //venobox
+    wp_enqueue_script( 'venobox', get_template_directory_uri().'/js/plugins/venobox/venobox.min.js', array('jquery'), '0.0.1', true );
 
     //coutdown
     wp_enqueue_script( 'coutdown', get_template_directory_uri().'/js/plugins/countdown/jquery.countdown.min.js', array('jquery'), '0.0.1', true );
@@ -197,6 +201,17 @@ function register_posts() {
         'singular_name' => __( 'Evento' )
       ),
       'public' => true,
+      'supports' => array(
+          'title',
+          'editor',
+          'excerpt',
+          'trackbacks',
+          'custom-fields',
+          'revisions',
+          'thumbnail',
+          'author',
+          'page-attributes',
+      ),
       'has_archive' => true,
       'rewrite' => array('slug' => 'eventos'),
     )
@@ -641,11 +656,15 @@ function getFollowingEvent(){
             //mostrar el evento mas cercano del mes actual
 
             if($mesnum == date('m')){
-                $feat_image = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID()));
+               $feat_image = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID()));
 
                 if($feat_image == ""){
-                    $feat_image = get_template_directory_uri().'/img/default.jpg';
-                } 
+                    
+                    $feat_image = wp_get_attachment_url(get_post_meta(get_the_ID(),'gallery',false)[0]);
+                    if($feat_image == ""){
+                        $feat_image = get_template_directory_uri().'/img/default.jpg';
+                    }
+                }
 
                 $registro = array();
                 $registro['fecha'] = $anio.'/'.$mesnum.'/'.$dianum;
@@ -706,8 +725,12 @@ function getNoticias(){
         $feat_image = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID()));
 
         if($feat_image == ""){
-            $feat_image = get_template_directory_uri().'/img/default.jpg';
-        } 
+            
+            $feat_image = wp_get_attachment_url(get_post_meta(get_the_ID(),'gallery',false)[0]);
+            if($feat_image == ""){
+                $feat_image = get_template_directory_uri().'/img/default.jpg';
+            }
+        }
 
         $registro = array();
         $registro['titulo'] = get_the_title();

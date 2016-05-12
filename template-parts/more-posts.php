@@ -1,4 +1,10 @@
-<div id="selected_post-2" class="widget sidebar-widget widget_selected_post">
+<?php 
+    $stickyid = "selected_post-2";
+    if(is_front_page() || is_home()){
+        $stickyid = "";
+    } 
+?>
+<div id="<?= $stickyid ?>" class="widget sidebar-widget widget_selected_post">
 <div class="sidebar-widget-title" style="border-bottom: 1px solid #eceae4;">
 <h3 class="widgettitle">Destacadas</h3></div>
 

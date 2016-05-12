@@ -130,6 +130,9 @@
           }
         })
 
+        //venobox
+        $('.venobox').venobox(); 
+
       //show map
 
         //mapas

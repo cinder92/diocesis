@@ -18,6 +18,9 @@
 			<div class="large-8 medium-6 columns">
 				<?php get_template_part('template-parts/more-comming-events') ?>
 			</div>
+			<div class="large-4 medium-6 columns">
+				<?php get_template_part('template-parts/more-posts') ?>
+			</div>
 		</div>
 		<div class="clearfix"></div>
 	</div>

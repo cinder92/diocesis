@@ -34,7 +34,7 @@
 	<div class="row">
 		<div class="large-4 medium-4 small-6 columns" id="branding">
 			<h1>
-				<a href="#">
+				<a href="<?= site_url() ?>">
 					<img src="<?= get_template_directory_uri() ?>/img/diocesis-piedras-negras.png" alt="Mi Diocesis" class="branding">
 				</a>
 			</h1>
@@ -71,7 +71,7 @@
 <?php if(is_home() || is_front_page()){ ?>
 
 <div class="large-12 columns" id="slider">
-	<div class="flexslider slider" style="background-image:url('<?= get_template_directory_uri() ?>/img/slide1.jpg')">
+	<div class="flexslider slider" style="background-image:url('<?= get_template_directory_uri() ?>/img/noticias-bg.jpg')">
 	  <ul class="slides">
 	    <?php 
 	    	$noticias = getNoticias();

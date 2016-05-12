@@ -8,7 +8,8 @@
 		</h3>
 		<div style="border-top: 4px solid #f8f7f3;"></div>
 	</div>
-	<img src="<?= $upcomming['image'] ?>" class="featured-event-image wp-post-image" alt="<?= $upcomming['titulo'] ?>">            
+	<!--<img src="<?= $upcomming['image'] ?>" class="featured-event-image wp-post-image" alt="<?= $upcomming['titulo'] ?>"> --> 
+	<div style="background-image:url('<?= $upcomming['image'] ?>');" class="featured-event-image wp-post-image"></div>  
 			<div class="featured-event-container">
                 <div class="featured-event-time">
 	                <span class="date"><?= $details['dianum'] ?></span>

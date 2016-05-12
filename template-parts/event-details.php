@@ -1,4 +1,15 @@
-<?php $details = getEventDetails(get_the_ID());?>
+<?php
+$details = getEventDetails(get_the_ID());
+$feat_image = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID()));
+
+if($feat_image != ""){
+    ?>	
+    	<div class="img-thumbnail" style="margin:0 0 20px 0">
+			<img src="<?= $feat_image ?>" alt="<?= get_the_title() ?>">
+		</div>
+    <?php
+}
+?>
 
 <div class="panel panel-default">
 	<div class="panel-heading">

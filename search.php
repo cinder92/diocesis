@@ -1,6 +1,4 @@
 <?php get_header(); ?>
-		<?php
-		if ( have_posts() ) : ?>
 
 			<header class="page-header">
 				<div class="row">
@@ -15,6 +13,7 @@
 				<div class="row">
 					<div class="large-9 medium-12 columns post-list">
 					<?php
+					if ( have_posts() ) : 
 					/* Start the Loop */
 					while ( have_posts() ) : the_post();
 
@@ -26,11 +25,13 @@
 
 					else :
 
-						get_template_part( 'template-parts/content', 'none' );
+						 get_template_part('template-parts/no-results');
 
 					endif; ?>
 					</div>
-					<div class="large-3 medium-12 columns">&nbsp;</div>
+					<div class="large-3 medium-12 columns">
+						<?php get_template_part('template-parts/more-posts') ?>
+					</div>
 
 				</div>
 

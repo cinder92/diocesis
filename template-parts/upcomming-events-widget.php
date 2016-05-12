@@ -1,6 +1,6 @@
 <div id="upcoming_events-2" class="widget sidebar-widget widget_upcoming_events">
 	<div class="sidebar-widget-title">
-		<h3 class="widgettitle">Upcoming Events</h3>
+		<h3 class="widgettitle">Próximos Eventos</h3>
 	</div>
 	<ul>
 		<?php 

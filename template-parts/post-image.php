@@ -2,7 +2,11 @@
         $feat_image = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID()));
 
         if($feat_image == ""){
-            $feat_image = get_template_directory_uri().'/img/default.jpg';
+            
+            $feat_image = wp_get_attachment_url(get_post_meta(get_the_ID(),'gallery',false)[0]);
+            if($feat_image == ""){
+                $feat_image = get_template_directory_uri().'/img/default.jpg';
+            }
         }
 ?>
 
