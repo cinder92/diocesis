@@ -1,4 +1,5 @@
 <?php
+setlocale(LC_ALL,"es_ES"); //fecha en español
 /**
  * Midiocesis functions and definitions.
  *
@@ -582,12 +583,14 @@ function getEvents(){
         //separar fecha en dia,mes,año
         $time = new DateTime($start);
         $mes = $time->format('M');
-        $mesnum = $time->format('m');
+        $mesnum = $time->format('n');
         $dianum = $time->format('d');
         $anio = $time->format('Y');
-        $dialetras = $time->format('l');
+        $dialetras = $time->format('w');
         $hora = $time->format('H:i');
 
+        $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+        $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
         //validar que se muestren solo los del año en curso
 
         if($anio >= date('Y')){
@@ -595,9 +598,9 @@ function getEvents(){
             if($searchBymonth != "" && $searchBymonth == $mesnum){
                 $registro = array();
                 $registro['title'] = get_the_title();
-                $registro['mes'] = $mes;
+                $registro['mes'] = $meses[$mesnum-1];
                 $registro['link'] = get_the_permalink();
-                $registro['dia'] = $dialetras;
+                $registro['dia'] = $dias[$dialetras];
                 $registro['dianum'] = $dianum;
                 $registro['hora'] = $hora;
                 array_push($response,$registro);
@@ -606,9 +609,9 @@ function getEvents(){
             if($searchBymonth == "" && $mesnum >= date('m')){
                 $registro = array();
                 $registro['title'] = get_the_title();
-                $registro['mes'] = $mes;
+                $registro['mes'] = $meses[$mesnum-1];
                 $registro['link'] = get_the_permalink();
-                $registro['dia'] = $dialetras;
+                $registro['dia'] = $dias[$dialetras];
                 $registro['dianum'] = $dianum;
                 $registro['hora'] = $hora;
                 array_push($response,$registro);
@@ -647,11 +650,15 @@ function getFollowingEvent(){
 
             $time = new DateTime($start);
             $mes = $time->format('M');
-            $mesnum = $time->format('m');
+            $mesnum = $time->format('n');
             $dianum = $time->format('d');
             $anio = $time->format('Y');
             $dialetras = $time->format('l');
             $hora = $time->format('H:i');
+
+            $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+            $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+
 
             //mostrar el evento mas cercano del mes actual
 
@@ -670,7 +677,7 @@ function getFollowingEvent(){
                 $registro['fecha'] = $anio.'/'.$mesnum.'/'.$dianum;
                 $registro['titulo'] = get_the_title();
                 $registro['link'] = get_the_permalink();
-                $registro['fecha_text'] = $mes.' '.$dianum.', '.$anio;
+                $registro['fecha_text'] = $meses[$mesnum-1].' '.$dianum.', '.$anio;
                 $registro['id'] = get_the_ID();
                 $registro['content'] = get_the_content();
                 $registro['image'] = $feat_image;
@@ -690,19 +697,23 @@ function getEventDetails($event){
 
     $time = new DateTime($start);
     $mes = $time->format('M');
-    $mesnum = $time->format('m');
+    $mesnum = $time->format('n');
     $dianum = $time->format('d');
     $anio = $time->format('Y');
     $anio2 = $time->format('y');
-    $dialetras = $time->format('l');
+    $dialetras = $time->format('w');
     $hora = $time->format('H:i');
 
+    //por si no soporta el setLocal el server
+    $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+    $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+
     $registro = array();
-    $registro['fecha'] = $dialetras.' | '.$mes.' '.$dianum.', '.$anio;
+    $registro['fecha'] = $dias[$dialetras].' | '.$meses[$mesnum-1].' '.$dianum.', '.$anio;
     $registro['ubicacion'] = get_the_title($location);
     $registro['hora'] = $hora;
     $registro['dianum'] = $dianum;
-    $registro['mesletra'] = $mes;
+    $registro['mesletra'] = $meses[$mesnum-1];
     $registro['aniodos'] = $anio2;
     $registro['coords'] = get_post_meta($location,'coords',true);
 
